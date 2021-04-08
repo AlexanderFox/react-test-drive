@@ -1,0 +1,7 @@
+.listItem {
+    display: flex;
+}
+
+.item {
+    padding: 10px 10px;
+}

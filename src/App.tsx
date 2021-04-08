@@ -1,25 +1,32 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+
+import { Home } from 'pages/Home';
+import { Users } from 'pages/Users';
+
+const items = [
+  { path: '/home', name: 'Home' },
+  { path: '/users', name: 'Users' },
+]
+
+const Menu = () => {
+  return <div>
+    { items.map(props => <Link key={props.name} to={props.path}>{props.name}</Link>) }
+  </div>
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Menu/>
+      <Switch>
+        <Route path="/home" component={Home} />
+        <Route path="/users" component={Users} />
+        <Route path="*" component={() => <div>404</div>}/>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
